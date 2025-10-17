@@ -1,7 +1,23 @@
+"use client"
+
+import { authService } from '@/service/authServices'
+import { RegisterRequest } from '@/types/auth'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function RegisterPage() {
+  const [form, setForm] = useState<RegisterRequest>({ name: "", email: "", password: "" })
+  const [error, setError] = useState<string>("")
+
+  const handleRegister = async () => {
+    try {
+      const res = await authService.register(form)
+      console.log("Register berhasil : ", res.user.name)
+    } catch {
+      setError("Register failed")
+    }
+  }
+
   return (
     <div className='w-full h-screen flex justify-center items-center bg-gray-300'>
         <div className='w-[400px] p-6 rounded-2xl shadow-xl bg-white'>
@@ -10,12 +26,14 @@ export default function RegisterPage() {
             <p className='text-gray-400 text-sm'>Organize your ideas. Achieve your goals.</p>
 
             <div className='flex flex-col w-full my-5 gap-3'>
-                <input type="text" className='w-full border border-gray-400 rounded-lg p-2' placeholder='Name'/>
-                <input type="text" className='w-full border border-gray-400 rounded-lg p-2' placeholder='Email'/>
-                <input type="text" className='w-full border border-gray-400 rounded-lg p-2' placeholder='Password'/>
+                <input type="text" className='w-full border border-gray-400 rounded-lg p-2' placeholder='Name' value={form.name} onChange={(e) => setForm({...form, name: e.target.value})}/>
+                <input type="text" className='w-full border border-gray-400 rounded-lg p-2' placeholder='Email' value={form.email} onChange={(e) => setForm({...form, email: e.target.value})}/>
+                <input type="text" className='w-full border border-gray-400 rounded-lg p-2' placeholder='Password' value={form.password} onChange={(e) => setForm({...form, password: e.target.value})}/>
             </div>
 
-            <button className='w-full bg-blue-500 text-white font-semibold py-2 px-5 rounded lg mb-3'>Register</button>
+            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+
+            <button onClick={handleRegister} className='w-full bg-blue-500 text-white font-semibold py-2 px-5 rounded lg mb-3'>Register</button>
 
             <p className='text-gray-400 text-center'>Already have an account? <Link href='/login' className='text-blue-500'>Login</Link></p>
         </div>

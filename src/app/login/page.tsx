@@ -46,7 +46,7 @@ export default function LoginPage() {
           />
         </div>
 
-        {error && <p className="text-red-500 text-sm mt-y">{error}</p>}
+        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
         <button
           onClick={handleLogin}

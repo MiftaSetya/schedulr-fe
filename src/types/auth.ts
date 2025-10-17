@@ -1,3 +1,9 @@
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
 export interface LoginRequest {
     email: string;
     password: string;
@@ -11,17 +17,9 @@ export interface RegisterRequest {
 
 export interface LoginResponse {
     token: string;
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    }
+    user: User;
 }
 
 export interface RegisterResponse {
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    }
+    user: User;
 }

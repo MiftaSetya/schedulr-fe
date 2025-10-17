@@ -1,7 +1,12 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function LoginPage() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
   return (
     <div className='w-full h-screen flex justify-center items-center bg-gray-300'>
         <div className='w-[400px] p-6 rounded-2xl shadow-xl bg-white'>

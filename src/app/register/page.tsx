@@ -1,6 +1,6 @@
 "use client"
 
-import { authService } from '@/service/authServices'
+import { authService } from '@/services/authServices'
 import { RegisterRequest } from '@/types/auth'
 import Link from 'next/link'
 import React, { useState } from 'react'

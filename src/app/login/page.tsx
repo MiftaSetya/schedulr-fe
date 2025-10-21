@@ -1,6 +1,6 @@
 "use client"
 
-import { authService } from "@/service/authServices";
+import { authService } from "@/services/authServices";
 import { LoginRequest } from "@/types/auth";
 import { storage } from "@/utils/storage";
 import Link from "next/link";

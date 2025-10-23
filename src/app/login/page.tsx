@@ -4,17 +4,19 @@ import { authService } from "@/services/authServices";
 import { LoginRequest } from "@/types/auth";
 import { storage } from "@/utils/storage";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function LoginPage() {
+  const router = useRouter()
   const [form, setForm] = useState<LoginRequest>({ email: "", password: "" });
   const [error, setError] = useState<string>("");
 
   const handleLogin = async () => {
     try {
       const res = await authService.login(form);
-      console.log("Login berhasil:", res.user.name);
       storage.setToken(res.token);
+      router.push("/boards")
     } catch {
       setError("Login gagal");
     }
